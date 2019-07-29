@@ -1,0 +1,14 @@
+Table{
+    width: 100%;
+    border:1px solid black;        
+}
+
+Table tr, Table td {
+    border:1px solid black;
+}
+
+
+.bg-green{
+    background:green;
+    color:#fff;
+}
