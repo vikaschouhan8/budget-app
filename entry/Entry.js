@@ -8,19 +8,27 @@ class Entry extends Component {
             type:'',
             remark:''
         }
-
+        this.handleFormSubmit = props.submitaction
+        this.clearEntry = props.clearEntry
         this.changeHandler = this.changeHandler.bind(this);
         this.resetentry = this.resetentry.bind(this)
     }
 
     changeHandler(e, fld){        
-            this.setState({[fld]:e.target.value})                
+            this.setState({[fld]:e.target.value})       
+    }
+
+    handleFormSubmitChild = ()=>{
+        this.handleFormSubmit({amount:this.state.amount, type:this.state.type, remark:this.state.remark});
+        // this.clearEntry()
+        this.resetentry()
     }
 
     resetentry(){
         this.setState({amount:'',type:'',remark:''})
     }
     
+
     render() {
         return (
             <div className="form-horizontal">
@@ -43,11 +51,10 @@ class Entry extends Component {
                     <div className="form-group">
                         <select 
                         className="form-control" 
-                        value={this.state.type}
                         onChange={(e, type)=>{this.changeHandler(e, "type")}}
                         >
-                            <option value="+">+</option>
-                            <option value="-">-</option>
+                            <option value="Debit">+</option>
+                            <option value="Credit">-</option>
                         </select>
                     </div>                
                 </div>
@@ -65,7 +72,11 @@ class Entry extends Component {
 
                 <div className="col-3">
                     <div className="form-group">
-                        <button type="button" className="btn btn-success">+</button>
+                        <button 
+                        type="button" 
+                        className="btn btn-success"
+                        onClick = {this.handleFormSubmitChild}
+                        disabled = {!this.state.remark}>+</button>
                     </div>                
                 </div>
             </div>
